@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:ths="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Header Autenticado</title>
+</head>
+<body>
+<div class="bg-light">
+    <div th:fragment="client" th:object="${client}" ths:authorize="hasRole('CLIENT')">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid-left">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="fas fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container-fluid-right">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" aria-current="page" href="#" id="navbarDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${client.getGivenNames()+' '+client.getLastNames()}">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div th:fragment="admin" th:object="${user}" ths:authorize="hasRole('ADMIN')">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid-left">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#admnavbarSupportedContent" aria-controls="admnavbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="fas fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="admnavbarSupportedContent">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container-fluid-right">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" aria-current="page" href="#" id="admnavbarDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${user.getMail()}">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="admnavbarDropdown">
+                            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+</body>
+</html>
